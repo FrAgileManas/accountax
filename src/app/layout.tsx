@@ -1,55 +1,29 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import { ThemeProvider } from "@/components/theme/theme-provider";
-import { Toaster } from "@/components/ui/toaster";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+// src/app/layout.tsx
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import { Navbar, Footer } from '@/components/layout';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "Opti Ecom AI - AI-Powered E-Commerce Optimization",
-  description:
-    "Boost your e-commerce sales with AI-generated product descriptions, pricing insights, and customer sentiment analysis. Optimize listings, track competitors, and enhance SEO with OptiEcomAi.",
-  icons: {
-    icon: "/icon.svg",
-  },
-};
+  title: 'Accountax - Professional Accounting Made Simple',
+  description: 'Transform your business finances with expert bookkeeping, tax preparation, and financial consulting services. Focus on growth while we handle the numbers.',
+  keywords: 'accounting, bookkeeping, tax preparation, financial consulting, business services',
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-            <Analytics />
-            <SpeedInsights />
-            <Toaster />
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
-  );
+    <html lang="en">
+      <body className={inter.className}>
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
+    </html>
+  )
 }

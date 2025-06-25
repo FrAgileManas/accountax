@@ -15,12 +15,10 @@ const servicesDropdown = [
 ]
 
 const resourcesDropdown = [
+  { name: 'About us', href: '/resources/about' },
   { name: 'Blog', href: '/resources/blog' },
-  { name: 'Case Studies', href: '/resources/case-studies' },
-  { name: 'White Papers', href: '/resources/white-papers' },
-  { name: 'Tax Calculator', href: '/resources/tax-calculator' },
-  { name: 'Templates', href: '/resources/templates' },
-  { name: 'FAQ', href: '/resources/faq' },
+  { name: 'Contact us', href: '/contact' },
+
 ]
 
 interface DropdownProps {
