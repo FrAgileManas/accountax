@@ -109,11 +109,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center group">
-            <span className="text-2xl font-bold text-primary relative">
+          <Link href="/" className="flex items-center">
+            <span className="text-2xl font-bold text-primary">
               Accountax
-              {/* Logo underline animation */}
-              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-primary scale-x-0 origin-center transition-transform duration-300 group-hover:scale-x-100"></span>
             </span>
           </Link>
 
