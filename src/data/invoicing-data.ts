@@ -127,24 +127,62 @@ export const invoicingData: InvoicingContent = {
     }
   ],
 
+  // Extended templates with additional properties (backward compatible)
   templates: [
     {
       id: "1",
       name: "Professional Services",
       description: "Perfect for consultants, agencies, and service providers",
-      category: "Services"
+      category: "Services",
+      // New optional properties
+      color: "blue",
+      rating: 4.8,
+      downloads: "2.1k"
     },
     {
       id: "2",
       name: "Product Sales",
       description: "Ideal for product-based businesses and e-commerce",
-      category: "Products"
+      category: "Products",
+      color: "green",
+      rating: 4.9,
+      downloads: "1.8k"
     },
     {
       id: "3",
       name: "Freelancer",
       description: "Simple, clean design for freelancers and contractors",
-      category: "Freelance"
+      category: "Freelance",
+      color: "purple",
+      rating: 4.7,
+      downloads: "3.2k"
+    },
+    {
+      id: "4",
+      name: "Modern Corporate",
+      description: "Contemporary design for modern businesses",
+      category: "Corporate",
+      color: "slate",
+      rating: 4.6,
+      downloads: "1.5k"
+    },
+    {
+      id: "5",
+      name: "Creative Agency",
+      description: "Stylish template for creative professionals",
+      category: "Creative",
+      color: "orange",
+      rating: 4.8,
+      downloads: "2.3k"
+    },
+    {
+      id: "6",
+      name: "Minimal Clean",
+      description: "Clean, minimalist design for any business",
+      category: "Minimal",
+      color: "gray",
+      rating: 4.5,
+      downloads: "1.9k"
     }
   ],
 

@@ -30,6 +30,11 @@ export interface InvoicingTemplate {
   description: string;
   image?: string;
   category: string;
+  congfig?: any; // Generic config for template customization
+  // New optional properties for enhanced templates
+  color?: string;
+  rating?: number;
+  downloads?: string;
 }
 
 export interface InvoicingStats {

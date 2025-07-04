@@ -42,20 +42,6 @@ export default function InvoicingHero() {
           ))}
         </div>
 
-        {/* Demo Preview */}
-        <div className="mt-16">
-          <div className="bg-white rounded-2xl shadow-xl p-8 border">
-            <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">📄</span>
-                </div>
-                <p className="text-gray-600 font-medium">Invoice Preview Demo</p>
-                <p className="text-sm text-gray-500 mt-1">Interactive demo coming soon</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

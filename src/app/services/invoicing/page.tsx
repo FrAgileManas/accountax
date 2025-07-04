@@ -1,10 +1,10 @@
-import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
+
 import InvoicingHero from "@/components/services/invoicing/invoicing-hero";
 import InvoicingFeatures from "@/components/services/invoicing/invoicing-features";
 import InvoicingBenefits from "@/components/services/invoicing/invoicing-benefits";
 import InvoicingTemplates from "@/components/services/invoicing/invoicing-templates";
 import InvoicingPricing from "@/components/services/invoicing/invoicing-pricing";
+import InvoicingDemo from "@/components/services/invoicing/invoicing-demo";
 import { CTASection } from "@/components/common/cta";
 import { Metadata } from "next";
 
@@ -20,6 +20,7 @@ export default function InvoicingPage() {
       
       <main>
         <InvoicingHero />
+        <InvoicingDemo />
         <InvoicingFeatures />
         <InvoicingBenefits />
         <InvoicingTemplates />
