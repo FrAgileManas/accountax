@@ -1,104 +1,76 @@
 "use client";
 import React, { useState } from 'react';
 import { X, Eye, Download, Star } from 'lucide-react';
+import { InvoicingTemplate } from '@/types/invoicing';
 
-// Generic template configuration
-const templateConfigs = {
-  professional: {
-    id: "1",
-    name: "Professional Services",
-    description: "Perfect for consultants, agencies, and service providers",
-    category: "Services",
-    color: "blue",
-    rating: 4.8,
-    downloads: "2.1k",
-    theme: {
-      primary: "blue-600",
-      secondary: "blue-50",
-      accent: "blue-200",
-      headerBg: "border-blue-600",
-      tableBg: "bg-blue-50"
-    }
+// Enhanced template configuration that extends the base template data
+interface TemplateConfig extends InvoicingTemplate {
+  theme: {
+    primary: string;
+    secondary: string;
+    accent: string;
+    headerBg: string;
+    tableBg: string;
+    textColor: string;
+    borderColor: string;
+  };
+}
+
+// Template configurations - these extend the base templates from data file
+const templateConfigs: Record<string, TemplateConfig['theme']> = {
+  "1": { // Professional Services
+    primary: "text-blue-600",
+    secondary: "bg-blue-50",
+    accent: "border-blue-200",
+    headerBg: "border-blue-600",
+    tableBg: "bg-blue-50",
+    textColor: "text-blue-600",
+    borderColor: "border-blue-600"
   },
-  product: {
-    id: "2",
-    name: "Product Sales",
-    description: "Ideal for product-based businesses and e-commerce",
-    category: "Products",
-    color: "green",
-    rating: 4.9,
-    downloads: "1.8k",
-    theme: {
-      primary: "green-600",
-      secondary: "green-50",
-      accent: "green-200",
-      headerBg: "bg-green-600",
-      tableBg: "bg-green-50"
-    }
+  "2": { // Product Sales
+    primary: "text-green-600",
+    secondary: "bg-green-50",
+    accent: "border-green-200",
+    headerBg: "bg-green-600",
+    tableBg: "bg-green-50",
+    textColor: "text-white",
+    borderColor: "border-green-600"
   },
-  freelancer: {
-    id: "3",
-    name: "Freelancer",
-    description: "Simple, clean design for freelancers and contractors",
-    category: "Freelance",
-    color: "purple",
-    rating: 4.7,
-    downloads: "3.2k",
-    theme: {
-      primary: "purple-600",
-      secondary: "purple-50",
-      accent: "purple-200",
-      headerBg: "border-purple-600",
-      tableBg: "bg-purple-50"
-    }
+  "3": { // Freelancer
+    primary: "text-purple-600",
+    secondary: "bg-purple-50",
+    accent: "border-purple-200",
+    headerBg: "border-purple-600",
+    tableBg: "bg-purple-50",
+    textColor: "text-purple-600",
+    borderColor: "border-purple-600"
   },
-  corporate: {
-    id: "4",
-    name: "Modern Corporate",
-    description: "Contemporary design for modern businesses",
-    category: "Corporate",
-    color: "slate",
-    rating: 4.6,
-    downloads: "1.5k",
-    theme: {
-      primary: "slate-600",
-      secondary: "slate-50",
-      accent: "slate-200",
-      headerBg: "bg-slate-600",
-      tableBg: "bg-slate-100"
-    }
+  "4": { // Modern Corporate
+    primary: "text-slate-600",
+    secondary: "bg-slate-50",
+    accent: "border-slate-200",
+    headerBg: "bg-slate-600",
+    tableBg: "bg-slate-100",
+    textColor: "text-white",
+    borderColor: "border-slate-600"
   },
-  creative: {
-    id: "5",
-    name: "Creative Agency",
-    description: "Stylish template for creative professionals",
-    category: "Creative",
-    color: "orange",
-    rating: 4.8,
-    downloads: "2.3k",
-    theme: {
-      primary: "orange-600",
-      secondary: "orange-50",
-      accent: "orange-200",
-      headerBg: "bg-gradient-to-r from-orange-500 to-red-500",
-      tableBg: "bg-orange-50"
-    }
+  "5": { // Creative Agency
+    primary: "text-orange-600",
+    secondary: "bg-orange-50",
+    accent: "border-orange-200",
+    headerBg: "bg-gradient-to-r from-orange-500 to-red-500",
+    tableBg: "bg-orange-50",
+    textColor: "text-white",
+    borderColor: "border-orange-600"
   },
-  minimal: {
-    id: "6",
-    name: "Minimal Clean",
-    description: "Clean, minimalist design for any business",
-    category: "Minimal",
-    color: "gray",
-    rating: 4.5,
-    downloads: "1.9k",
-    theme: {
-      primary: "gray-600",
-      secondary: "gray-50",
-      accent: "gray-200",
-      headerBg: "border-gray-300",
-      tableBg: "bg-gray-50"
-    }
+  "6": { // Minimal Clean
+    primary: "text-gray-600",
+    secondary: "bg-gray-50",
+    accent: "border-gray-200",
+    headerBg: "border-gray-300",
+    tableBg: "bg-gray-50",
+    textColor: "text-gray-600",
+    borderColor: "border-gray-300"
   }
 };
 
@@ -147,15 +119,24 @@ const genericData = {
 };
 
 // Generic Template Component
-const GenericTemplate = ({ config , layout = "standard" }) => {
-  const { theme } = config;
+interface GenericTemplateProps {
+  template: InvoicingTemplate;
+  layout?: "standard" | "header" | "minimal";
+}
+
+const GenericTemplate: React.FC<GenericTemplateProps> = ({ template, layout = "standard" }) => {
+  const theme = templateConfigs[template.id];
   
+  if (!theme) {
+    return <div className="p-4 text-center text-gray-500">Template not found</div>;
+  }
+
   const renderStandardLayout = () => (
     <div className="w-full h-full bg-white p-6 text-xs">
-      <div className={`border-b-2 ${theme.headerBg} pb-4 mb-6`}>
+      <div className={`border-b-2 ${theme.borderColor} pb-4 mb-6`}>
         <div className="flex justify-between items-start">
           <div>
-            <h1 className={`text-2xl font-bold text-${theme.primary}`}>INVOICE</h1>
+            <h1 className={`text-2xl font-bold ${theme.primary}`}>INVOICE</h1>
             <p className="text-gray-600">{genericData.invoice.number}</p>
           </div>
           <div className="text-right">
@@ -181,7 +162,7 @@ const GenericTemplate = ({ config , layout = "standard" }) => {
 
       <table className="w-full mb-6">
         <thead>
-          <tr className={`${theme.tableBg} border-b border-${theme.accent}`}>
+          <tr className={`${theme.tableBg} ${theme.accent} border-b`}>
             <th className="text-left p-2 text-gray-700">Description</th>
             <th className="text-right p-2 text-gray-700">Qty/Hours</th>
             <th className="text-right p-2 text-gray-700">Rate</th>
@@ -221,7 +202,7 @@ const GenericTemplate = ({ config , layout = "standard" }) => {
 
   const renderHeaderLayout = () => (
     <div className="w-full h-full bg-white p-6 text-xs">
-      <div className={`${theme.headerBg} text-white p-4 rounded-t-lg mb-6`}>
+      <div className={`${theme.headerBg} ${theme.textColor} p-4 rounded-t-lg mb-6`}>
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold">INVOICE</h1>
@@ -249,7 +230,7 @@ const GenericTemplate = ({ config , layout = "standard" }) => {
 
       <table className="w-full mb-6">
         <thead>
-          <tr className={`${theme.tableBg} border-b border-${theme.accent}`}>
+          <tr className={`${theme.tableBg} ${theme.accent} border-b`}>
             <th className="text-left p-2 text-gray-700">Description</th>
             <th className="text-center p-2 text-gray-700">Qty</th>
             <th className="text-right p-2 text-gray-700">Rate</th>
@@ -278,7 +259,7 @@ const GenericTemplate = ({ config , layout = "standard" }) => {
             <span>Tax ({genericData.totals.taxRate}%):</span>
             <span>${genericData.totals.tax.toLocaleString()}</span>
           </div>
-          <div className={`flex justify-between py-3 font-bold text-lg ${theme.headerBg} text-white px-2 rounded`}>
+          <div className={`flex justify-between py-3 font-bold text-lg ${theme.headerBg} ${theme.textColor} px-2 rounded`}>
             <span>Total:</span>
             <span>${genericData.totals.total.toLocaleString()}</span>
           </div>
@@ -362,26 +343,9 @@ const GenericTemplate = ({ config , layout = "standard" }) => {
   }
 };
 
-// Type definitions for better type safety
-interface Template {
-  id: string;
-  name: string;
-  description: string;
-  category: string;
-  color: string;
-  rating: number;
-  downloads: string;
-  theme: {
-    primary: string;
-    secondary: string;
-    accent: string;
-    headerBg: string;
-    tableBg: string;
-  };
-}
-
+// Template Modal Component
 interface TemplateModalProps {
-  template: Template | null;
+  template: InvoicingTemplate | null;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -389,7 +353,7 @@ interface TemplateModalProps {
 const TemplateModal: React.FC<TemplateModalProps> = ({ template, isOpen, onClose }) => {
   if (!isOpen || !template) return null;
 
-  const getLayout = (templateId: string) => {
+  const getLayout = (templateId: string): "standard" | "header" | "minimal" => {
     switch (templateId) {
       case "2":
       case "5":
@@ -420,7 +384,7 @@ const TemplateModal: React.FC<TemplateModalProps> = ({ template, isOpen, onClose
         <div className="p-4 overflow-auto max-h-[calc(90vh-120px)]">
           <div className="bg-gray-100 rounded-lg p-4">
             <div className="bg-white rounded shadow-lg" style={{ aspectRatio: '8.5/11' }}>
-              <GenericTemplate config={template} layout={getLayout(template.id)} />
+              <GenericTemplate template={template} layout={getLayout(template.id)} />
             </div>
           </div>
         </div>
@@ -429,27 +393,29 @@ const TemplateModal: React.FC<TemplateModalProps> = ({ template, isOpen, onClose
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1 text-sm text-gray-600">
               <Star size={16} className="text-yellow-500 fill-current" />
-              <span>{template.rating}</span>
+              <span>{template.rating || 'N/A'}</span>
             </div>
             <div className="flex items-center gap-1 text-sm text-gray-600">
               <Download size={16} />
-              <span>{template.downloads} downloads</span>
+              <span>{template.downloads || 'N/A'} downloads</span>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
   );
 };
 
-export default function InvoicingTemplates() {
-  const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
+// Main Component Props
+interface InvoicingTemplatesProps {
+  templates: InvoicingTemplate[];
+}
+
+const InvoicingTemplates: React.FC<InvoicingTemplatesProps> = ({ templates }) => {
+  const [selectedTemplate, setSelectedTemplate] = useState<InvoicingTemplate | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const templates = Object.values(templateConfigs);
-
-  const openTemplate = (template: Template) => {
+  const openTemplate = (template: InvoicingTemplate) => {
     setSelectedTemplate(template);
     setIsModalOpen(true);
   };
@@ -459,14 +425,14 @@ export default function InvoicingTemplates() {
     setSelectedTemplate(null);
   };
 
-  const getColorClasses = (color: string) => {
-    const colorMap: Record<string, string> = {
-      blue: 'bg-blue-600 border-blue-200 hover:border-blue-300',
-      green: 'bg-green-600 border-green-200 hover:border-green-300',
-      purple: 'bg-purple-600 border-purple-200 hover:border-purple-300',
-      slate: 'bg-slate-600 border-slate-200 hover:border-slate-300',
-      orange: 'bg-gradient-to-r from-orange-500 to-red-500 border-orange-200 hover:border-orange-300',
-      gray: 'bg-gray-600 border-gray-200 hover:border-gray-300'
+  const getColorClasses = (color: string = 'blue') => {
+    const colorMap: Record<string, { bg: string; border: string; hover: string }> = {
+      blue: { bg: 'bg-blue-600', border: 'border-blue-200', hover: 'hover:border-blue-300' },
+      green: { bg: 'bg-green-600', border: 'border-green-200', hover: 'hover:border-green-300' },
+      purple: { bg: 'bg-purple-600', border: 'border-purple-200', hover: 'hover:border-purple-300' },
+      slate: { bg: 'bg-slate-600', border: 'border-slate-200', hover: 'hover:border-slate-300' },
+      orange: { bg: 'bg-gradient-to-r from-orange-500 to-red-500', border: 'border-orange-200', hover: 'hover:border-orange-300' },
+      gray: { bg: 'bg-gray-600', border: 'border-gray-200', hover: 'hover:border-gray-300' }
     };
     return colorMap[color] || colorMap.blue;
   };
@@ -484,73 +450,76 @@ export default function InvoicingTemplates() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {templates.map((template) => (
-            <div key={template.id} className="group cursor-pointer">
-              <div className={`bg-white border-2 rounded-xl p-6 hover:shadow-lg transition-all ${getColorClasses(template.color).split(' ')[1]} ${getColorClasses(template.color).split(' ')[2]}`}>
-                {/* Template Preview */}
-                <div className="aspect-[3/4] bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg mb-4 relative overflow-hidden">
-                  <div className="absolute inset-4 bg-white rounded shadow-sm p-3">
-                    <div className={`h-2 rounded mb-2 ${getColorClasses(template.color).split(' ')[0]}`}></div>
-                    <div className="h-1 bg-gray-200 rounded mb-1"></div>
-                    <div className="h-1 bg-gray-200 rounded w-3/4 mb-3"></div>
-                    <div className="space-y-1">
-                      <div className="h-1 bg-gray-100 rounded"></div>
-                      <div className="h-1 bg-gray-100 rounded w-5/6"></div>
-                      <div className="h-1 bg-gray-100 rounded w-4/6"></div>
-                      <div className="h-1 bg-gray-100 rounded w-3/6"></div>
+          {templates.map((template) => {
+            const colorClasses = getColorClasses(template.color);
+            return (
+              <div key={template.id} className="group cursor-pointer">
+                <div className={`bg-white border-2 rounded-xl p-6 hover:shadow-lg transition-all ${colorClasses.border} ${colorClasses.hover}`}>
+                  {/* Template Preview */}
+                  <div className="aspect-[3/4] bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg mb-4 relative overflow-hidden">
+                    <div className="absolute inset-4 bg-white rounded shadow-sm p-3">
+                      <div className={`h-2 rounded mb-2 ${colorClasses.bg}`}></div>
+                      <div className="h-1 bg-gray-200 rounded mb-1"></div>
+                      <div className="h-1 bg-gray-200 rounded w-3/4 mb-3"></div>
+                      <div className="space-y-1">
+                        <div className="h-1 bg-gray-100 rounded"></div>
+                        <div className="h-1 bg-gray-100 rounded w-5/6"></div>
+                        <div className="h-1 bg-gray-100 rounded w-4/6"></div>
+                        <div className="h-1 bg-gray-100 rounded w-3/6"></div>
+                      </div>
+                      <div className="absolute bottom-3 right-3 w-8 h-1 bg-gray-300 rounded"></div>
                     </div>
-                    <div className="absolute bottom-3 right-3 w-8 h-1 bg-gray-300 rounded"></div>
+                    
+                    {/* Category Badge */}
+                    <div className={`absolute top-2 right-2 text-white text-xs px-2 py-1 rounded ${colorClasses.bg}`}>
+                      {template.category}
+                    </div>
+                    
+                    {/* Preview Overlay */}
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button
+                          onClick={() => openTemplate(template)}
+                          className="bg-white text-gray-800 px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2"
+                        >
+                          <Eye size={16} />
+                          Preview
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {template.name}
+                    </h3>
+                    <div className="flex items-center gap-1 text-sm text-gray-600">
+                      <Star size={14} className="text-yellow-500 fill-current" />
+                      <span>{template.rating || 'N/A'}</span>
+                    </div>
                   </div>
                   
-                  {/* Category Badge */}
-                  <div className={`absolute top-2 right-2 text-white text-xs px-2 py-1 rounded ${getColorClasses(template.color).split(' ')[0]}`}>
-                    {template.category}
-                  </div>
-                  
-                  {/* Preview Overlay */}
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <button
-                        onClick={() => openTemplate(template)}
-                        className="bg-white text-gray-800 px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2"
-                      >
-                        <Eye size={16} />
-                        Preview
-                      </button>
+                  <p className="text-gray-600 text-sm mb-3">
+                    {template.description}
+                  </p>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1 text-xs text-gray-500">
+                      <Download size={12} />
+                      <span>{template.downloads || 'N/A'}</span>
                     </div>
+                    <button 
+                      onClick={() => openTemplate(template)}
+                      className="bg-gray-50 text-gray-700 py-2 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors text-sm font-medium group-hover:bg-blue-50 group-hover:text-blue-600 flex items-center gap-2"
+                    >
+                      <Eye size={14} />
+                      Preview
+                    </button>
                   </div>
-                </div>
-
-                <div className="flex items-start justify-between mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    {template.name}
-                  </h3>
-                  <div className="flex items-center gap-1 text-sm text-gray-600">
-                    <Star size={14} className="text-yellow-500 fill-current" />
-                    <span>{template.rating}</span>
-                  </div>
-                </div>
-                
-                <p className="text-gray-600 text-sm mb-3">
-                  {template.description}
-                </p>
-
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1 text-xs text-gray-500">
-                    <Download size={12} />
-                    <span>{template.downloads}</span>
-                  </div>
-                  <button 
-                    onClick={() => openTemplate(template)}
-                    className="bg-gray-50 text-gray-700 py-2 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors text-sm font-medium group-hover:bg-blue-50 group-hover:text-blue-600 flex items-center gap-2"
-                  >
-                    <Eye size={14} />
-                    Preview
-                  </button>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-12 text-center">
@@ -571,4 +540,6 @@ export default function InvoicingTemplates() {
       />
     </section>
   );
-}
+};
+
+export default InvoicingTemplates;

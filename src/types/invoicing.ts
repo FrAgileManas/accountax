@@ -30,8 +30,8 @@ export interface InvoicingTemplate {
   description: string;
   image?: string;
   category: string;
-  congfig?: any; // Generic config for template customization
-  // New optional properties for enhanced templates
+  config?: any; // Fixed typo: was 'congfig'
+  // Optional properties for enhanced templates
   color?: string;
   rating?: number;
   downloads?: string;
@@ -56,4 +56,55 @@ export interface InvoicingContent {
   templates: InvoicingTemplate[];
   stats: InvoicingStats[];
   plans: InvoicingPlan[];
+}
+
+// Additional interfaces for enhanced template functionality
+export interface TemplateTheme {
+  primary: string;
+  secondary: string;
+  accent: string;
+  headerBg: string;
+  tableBg: string;
+  textColor: string;
+  borderColor: string;
+}
+
+export interface ExtendedTemplate extends InvoicingTemplate {
+  theme: TemplateTheme;
+}
+
+// Generic data interfaces for template previews
+export interface InvoiceData {
+  company: {
+    name: string;
+    address: string;
+    city: string;
+    email: string;
+    phone: string;
+  };
+  client: {
+    name: string;
+    contact: string;
+    address: string;
+    city: string;
+    email: string;
+  };
+  invoice: {
+    number: string;
+    date: string;
+    dueDate: string;
+    project: string;
+  };
+  items: Array<{
+    description: string;
+    quantity: number;
+    rate: number;
+    amount: number;
+  }>;
+  totals: {
+    subtotal: number;
+    tax: number;
+    taxRate: number;
+    total: number;
+  };
 }

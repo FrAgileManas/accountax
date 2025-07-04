@@ -7,7 +7,7 @@ import InvoicingPricing from "@/components/services/invoicing/invoicing-pricing"
 import InvoicingDemo from "@/components/services/invoicing/invoicing-demo";
 import { CTASection } from "@/components/common/cta";
 import { Metadata } from "next";
-
+import { invoicingData } from "@/data/invoicing-data";
 export const metadata: Metadata = {
   title: "Invoicing Solutions | AccountAX - Professional Invoice Management",
   description: "Streamline your billing process with AccountAX's comprehensive invoicing platform. Create professional invoices, automate payments, and get paid faster.",
@@ -23,7 +23,7 @@ export default function InvoicingPage() {
         <InvoicingDemo />
         <InvoicingFeatures />
         <InvoicingBenefits />
-        <InvoicingTemplates />
+        <InvoicingTemplates templates={invoicingData.templates}/>
         <InvoicingPricing />
         <CTASection />
       </main>
