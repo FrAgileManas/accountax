@@ -145,24 +145,6 @@ export const invoicingData: InvoicingContent = {
       name: "Freelancer",
       description: "Simple, clean design for freelancers and contractors",
       category: "Freelance"
-    },
-    {
-      id: "4",
-      name: "Corporate",
-      description: "Enterprise-grade template for large organizations",
-      category: "Corporate"
-    },
-    {
-      id: "5",
-      name: "Creative",
-      description: "Modern, artistic design for creative professionals",
-      category: "Creative"
-    },
-    {
-      id: "6",
-      name: "Minimalist",
-      description: "Clean, simple design focusing on essential information",
-      category: "Minimal"
     }
   ],
 

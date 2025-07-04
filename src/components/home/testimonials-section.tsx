@@ -1,7 +1,7 @@
 'use client'
 
 import { Star, Quote } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const testimonials = [
   {
@@ -32,6 +32,20 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    // Auto-swipe every 5 seconds, but pause when hovered
+    const interval = setInterval(() => {
+      if (!isHovered) {
+        setActiveIndex((prevIndex) => 
+          prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
+        );
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isHovered]);
 
   return (
     <section className="py-20 bg-white">
@@ -46,7 +60,11 @@ export default function TestimonialsSection() {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gray-50 rounded-2xl p-8 md:p-12 relative">
+          <div 
+            className="bg-gray-50 rounded-2xl p-8 md:p-12 relative transition-all duration-500 transform hover:scale-105"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
             <Quote className="absolute top-6 left-6 h-8 w-8 text-blue-600 opacity-50" />
             
             <div className="text-center mb-8">
@@ -55,8 +73,10 @@ export default function TestimonialsSection() {
                   <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
                 ))}
               </div>
-              <blockquote className="text-lg md:text-xl text-gray-700 italic mb-6">
-                "{testimonials[activeIndex].content}"
+              <blockquote className="text-lg md:text-xl text-gray-700 italic mb-6 min-h-[120px] flex items-center justify-center">
+                <span className="transition-opacity duration-300">
+                  "{testimonials[activeIndex].content}"
+                </span>
               </blockquote>
               <div className="flex items-center justify-center space-x-4">
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
@@ -83,15 +103,35 @@ export default function TestimonialsSection() {
                 <button
                   key={index}
                   onClick={() => setActiveIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-colors ${
-                    index === activeIndex ? 'bg-blue-600' : 'bg-gray-300'
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === activeIndex ? 'bg-blue-600 scale-110' : 'bg-gray-300 hover:bg-gray-400'
                   }`}
                 />
               ))}
             </div>
+
+            {/* Progress indicator */}
+            <div className="mt-4 flex justify-center">
+              <div className="w-16 h-1 bg-gray-200 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-blue-600 transition-all duration-100 ease-linear"
+                  style={{ 
+                    width: isHovered ? '100%' : '0%',
+                    animation: isHovered ? 'none' : 'progress 3s linear infinite'
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes progress {
+          0% { width: 0%; }
+          100% { width: 100%; }
+        }
+      `}</style>
     </section>
   );
 }

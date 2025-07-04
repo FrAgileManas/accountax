@@ -15,7 +15,7 @@ export default function InvoicingBenefits() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {invoicingData.benefits.map((benefit) => (
-            <div key={benefit.id} className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+            <div key={benefit.id} className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
                 <span className="text-2xl">{benefit.icon}</span>
               </div>

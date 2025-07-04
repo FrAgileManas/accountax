@@ -15,13 +15,14 @@ import {
 
 const footerLinks = {
   services: [
-    { name: 'Bookkeeping Services', href: '/services/bookkeeping' },
-    { name: 'Tax Preparation', href: '/services/tax-preparation' },
-    { name: 'Financial Consulting', href: '/services/financial-consulting' },
-    { name: 'Payroll Management', href: '/services/payroll' },
-    { name: 'Business Registration', href: '/services/business-registration' },
-    { name: 'Compliance Services', href: '/services/compliance' },
-  ],
+  { name: 'Bookkeeping Services', href: '/services/bookkeeping' },
+  { name: 'Invoicing Solutions', href: '/services/invoicing' },
+  { name: 'Payroll Management', href: '/services/payroll' },
+  { name: 'Accounting', href: '/services/accounting' },
+  { name: 'Tax Consulting', href: '/services/tax-consulting' },
+  { name: 'MCA Work', href: '/services/mca-work' },
+  { name: 'Foreign Accounting', href: '/services/foreign-accounting' },
+],
   company: [
     { name: 'About Us', href: '/about' },
     { name: 'Why Choose Us', href: '/why-choose-us' },

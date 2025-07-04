@@ -16,7 +16,7 @@ export default function InvoicingTemplates() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {invoicingData.templates.map((template) => (
             <div key={template.id} className="group cursor-pointer">
-              <div className="bg-white border-2 border-gray-100 rounded-2xl p-6 hover:border-blue-200 hover:shadow-lg transition-all">
+              <div className="bg-white border-2 border-gray-100 rounded-xl p-6 hover:border-blue-200 hover:shadow-lg transition-all">
                 {/* Template Preview */}
                 <div className="aspect-[3/4] bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg mb-4 relative overflow-hidden">
                   <div className="absolute inset-4 bg-white rounded shadow-sm p-3">
