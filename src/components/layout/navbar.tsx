@@ -17,8 +17,7 @@ const servicesDropdown = [
 
 
 const resourcesDropdown = [
-  { name: 'About us', href: '/resources/about' },
-  { name: 'Blog', href: '/resources/blog' },
+  { name: 'About us', href: '/about' },
   { name: 'Contact us', href: '/contact' },
 ]
 
@@ -118,13 +117,18 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Dropdown title="Services" items={servicesDropdown} />
-            <AnimatedNavLink href="/why-choose-us">
-              Why Choose Us
+            <AnimatedNavLink href="/why-us">
+              Why us
             </AnimatedNavLink>
             <AnimatedNavLink href="/pricing">
               Pricing
             </AnimatedNavLink>
-            <Dropdown title="Resources" items={resourcesDropdown} />
+            <AnimatedNavLink href="/contact">
+              Contact Us
+            </AnimatedNavLink>
+            <AnimatedNavLink href="/about">
+              About Us
+            </AnimatedNavLink>
           </div>
 
           {/* CTA Button */}

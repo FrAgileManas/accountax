@@ -25,20 +25,12 @@ const footerLinks = {
 ],
   company: [
     { name: 'About Us', href: '/about' },
-    { name: 'Why Choose Us', href: '/why-choose-us' },
+    { name: 'Why Choose Us', href: '/why-us' },
     { name: 'Our Team', href: '/team' },
-    { name: 'Careers', href: '/careers' },
     { name: 'Contact', href: '/contact' },
     { name: 'Privacy Policy', href: '/privacy' },
   ],
-  resources: [
-    { name: 'Blog', href: '/resources/blog' },
-    { name: 'Case Studies', href: '/resources/case-studies' },
-    { name: 'White Papers', href: '/resources/white-papers' },
-    { name: 'Tax Calculator', href: '/resources/tax-calculator' },
-    { name: 'Templates', href: '/resources/templates' },
-    { name: 'FAQ', href: '/resources/faq' },
-  ],
+  
   support: [
     { name: 'Help Center', href: '/support' },
     { name: 'Terms of Service', href: '/terms' },
@@ -175,22 +167,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Resources */}
-          <div>
-            <h4 className="font-semibold text-white mb-4">Resources</h4>
-            <ul className="space-y-2">
-              {footerLinks.resources.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    href={link.href} 
-                    className="text-gray-300 hover:text-primary transition-colors duration-200"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          
 
           {/* Support */}
           <div>

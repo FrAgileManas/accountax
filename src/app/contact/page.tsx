@@ -92,22 +92,6 @@ export default function ContactPage() {
     { icon: TrendingUp, value: '98%', label: 'Client Retention' }
   ]
 
-  // New testimonial component
-  const testimonials = [
-    {
-      name: 'Sarah Johnson',
-      company: 'Tech Startup Inc.',
-      text: 'AccountAx transformed our financial management. Their expertise saved us countless hours.',
-      rating: 5
-    },
-    {
-      name: 'Michael Chen',
-      company: 'Local Restaurant',
-      text: 'Professional, reliable, and always available when we need them. Highly recommended!',
-      rating: 5
-    }
-  ]
-
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
@@ -194,44 +178,14 @@ export default function ContactPage() {
                 Book Now
               </button>
             </div>
-
-            {/* New Testimonials Section */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <h3 className="text-xl font-bold text-high mb-4">What Our Clients Say</h3>
-              <div className="space-y-4">
-                {testimonials.map((testimonial, index) => (
-                  <div key={index} className="border-l-4 border-primary pl-4">
-                    <div className="flex items-center mb-2">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                    <p className="text-sm text-medium italic mb-2">"{testimonial.text}"</p>
-                    <div className="text-xs text-low">
-                      <span className="font-medium">{testimonial.name}</span>
-                      <span className="mx-1">•</span>
-                      <span>{testimonial.company}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-high mb-6">Send Us a Message</h2>
-              
-              {/* New Progress Indicator */}
-              <div className="mb-6">
-                <div className="flex items-center justify-between text-sm text-medium mb-2">
-                  <span>Quick Response Time</span>
-                  <span className="text-primary font-medium">Usually within 2 hours</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-primary h-2 rounded-full" style={{ width: '85%' }}></div>
-                </div>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-high">Send Us a Message</h2>
+                <span className="text-sm text-primary font-medium">Usually within 2 hours</span>
               </div>
               
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -356,21 +310,10 @@ export default function ContactPage() {
                     </>
                   )}
                 </button>
+                
               </form>
 
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <p className="text-sm text-medium text-center">
-                  By submitting this form, you agree to our{' '}
-                  <a href="/privacy" className="text-primary hover:underline">
-                    Privacy Policy
-                  </a>{' '}
-                  and{' '}
-                  <a href="/terms" className="text-primary hover:underline">
-                    Terms of Service
-                  </a>
-                  .
-                </p>
-              </div>
+              
             </div>
           </div>
         </div>
